@@ -1,0 +1,9 @@
+@import "config/var";
+@import "config/font";
+body{
+    padding: 0;
+    margin: 0;
+    // @include regular;
+}
+@import "libs/*.scss";
+@import "style/*.scss";

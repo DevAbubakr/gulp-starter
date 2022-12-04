@@ -1,0 +1,19 @@
+include ../include/_var 
+include ../blocks/btn.pug
+include ../blocks/desc.pug
+include ../blocks/title.pug
+block var
+doctype html
+html(lang="en")
+    head
+      //- Head
+      include ../include/_head
+    body 
+        //- Header
+        block header 
+          include header
+        //- Content
+        block content 
+        //- Footer
+        block footer 
+          include footer 
