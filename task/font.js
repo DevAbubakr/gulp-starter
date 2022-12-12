@@ -1,23 +1,23 @@
 // Gulp include
-const {src,dest} = require("gulp");
+import gulp from "gulp";
 
 // Plugins include
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const fonter = require("gulp-fonter");
-const ttf2woff2 = require("gulp-ttf2woff2");
-const newer = require("gulp-newer");
-const gulpIf = require("gulp-if");
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import fonter from "gulp-fonter";
+import ttf2woff2 from "gulp-ttf2woff2";
+import newer from "gulp-newer";
+import gulpIf from "gulp-if";
 
 // Url include
-const url = require("../settings/url.js");
+import url from "../settings/url.js";
 
 // option include
-const option = require("../settings/option.js");
+import option from "../settings/option.js";
 
 // Font task
-const font = () => {
-    return src(url.font.src)
+export default () => {
+    return gulp.src(url.font.src)
     .pipe(plumber({
         errorHandler: notify.onError( error => ({
             title: "FONT",
@@ -28,7 +28,5 @@ const font = () => {
     .pipe(gulpIf(option.isP, fonter({formats: ["ttf","eot","woff"]})))
     .pipe(newer(url.font.dest))
     .pipe(ttf2woff2())
-    .pipe(dest(url.font.dest))
+    .pipe(gulp.dest(url.font.dest))
 }
-
-module.exports = font;

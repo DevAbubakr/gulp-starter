@@ -1,12 +1,10 @@
-// del include
-const del = require("del");
+// Del include
+import {deleteAsync} from "del";
 
 // Url include
-const url = require("../settings/url.js");
+import url from "../settings/url.js";
 
-// del 
-const clear = () => {
-  return del(url.ready)
+// Del task
+export default () => {
+  return deleteAsync(url.ready)
 }
-
-module.exports = clear;

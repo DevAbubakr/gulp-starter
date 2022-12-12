@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
+  "type": "module",
   "scripts": {
     "dev": "gulp",
     "build": "gulp --production"
@@ -15,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.27.10",
-    "del": "^6.1.1",
+    "del": "^7.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-concat": "^2.6.1",
@@ -34,8 +35,10 @@
     "gulp-sass-glob": "^1.1.0",
     "gulp-ttf2woff2": "^4.0.1",
     "gulp-webp": "^4.0.1",
+    "gulp-webp-html": "^1.0.2",
     "node-sass": "^8.0.0",
     "node-sass-tilde-importer": "^1.0.2",
+    "pug-include-glob": "^0.4.3",
     "sass": "^1.56.1",
     "sass-glob-importer": "^1.0.1",
     "webpack": "^5.75.0",

@@ -1,23 +1,23 @@
 // Gulp include
-const {src,dest} = require("gulp");
+import gulp from "gulp";
 
 // Plugins include
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const newer = require("gulp-newer");
-const imagemin = require("gulp-imagemin");
-const webp = require("gulp-webp");
-const gulpIf = require("gulp-if");
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import newer from "gulp-newer";
+import imagemin from "gulp-imagemin";
+import webp from "gulp-webp";
+import gulpIf from "gulp-if";
 
 // Url include
-const url = require("../settings/url.js");
+import url from "../settings/url.js";
 
 // option include
-const option = require("../settings/option.js");
+import option from "../settings/option.js";
 
 // Image task
-const image = () => {
-    return src(url.img.src)
+export default () => {
+    return gulp.src(url.img.src)
     .pipe(plumber({
         errorHandler: notify.onError( error => ({
             title: "IMAGE",
@@ -26,9 +26,7 @@ const image = () => {
     }))
     .pipe(newer(url.img.dest))
     .pipe(gulpIf(option.isP, imagemin({verbose: true})))
-    .pipe(dest(url.img.dest))
+    .pipe(gulp.dest(url.img.dest))
     .pipe(webp())
-    .pipe(dest(url.img.dest))
+    .pipe(gulp.dest(url.img.dest))
 }
-
-module.exports = image;

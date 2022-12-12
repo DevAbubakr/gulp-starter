@@ -1,23 +1,23 @@
 // Gulp include
-const {src,dest} = require("gulp");
+import gulp from "gulp";
 
 // plugins include
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const jsmin = require('gulp-jsmin');
-const rename = require("gulp-rename")
-const webpack = require("webpack-stream")
-const gulpIf = require("gulp-if");
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import jsmin from 'gulp-jsmin';
+import rename from "gulp-rename"
+import webpack from "webpack-stream";
+import gulpIf from "gulp-if";
 
 // url include
-const url = require('../settings/url.js')
+import url from '../settings/url.js'
 
 // option include
-const option = require("../settings/option.js");
+import option from "../settings/option.js";
 
 // js task
-const javaScript = () => {
-  return src(url.js.src)
+export default () => {
+  return gulp.src(url.js.src)
   .pipe(plumber({
     errorHandler: notify.onError( error => ({
         title: "JS",
@@ -29,7 +29,5 @@ const javaScript = () => {
   }))
   // .pipe(gulpIf(option.isP, jsmin()))
   .pipe(rename({suffix: '.min'}))
-  .pipe(dest(url.js.dest));
+  .pipe(gulp.dest(url.js.dest));
 }
-
-module.exports = javaScript;

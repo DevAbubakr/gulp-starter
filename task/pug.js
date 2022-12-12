@@ -1,29 +1,32 @@
 // Gulp include
-const {src,dest} = require("gulp");
+import gulp from "gulp";
 
 // plugins include
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const gulpPug = require("gulp-pug")
-const gulpIf = require("gulp-if");
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import webpHtml from "gulp-webp-html";
+import pug from "gulp-pug";
+import pugGlob from "pug-include-glob";
 
 // url include
-const url = require('../settings/url.js')
+import url from '../settings/url.js'
 
 // option include
-const option = require("../settings/option.js");
+import option from "../settings/option.js";
 
 // Pug task
-const pug = () => {
-  return src(url.pug.src)
+export default () => {
+  return gulp.src(url.pug.src)
   .pipe(plumber({
-    errorHandler: notify.onError( error => ({
-        title: "PUG",
-        message: error.message
+    errorHandler: notify.onError(error => ({
+      title: "PUG",
+      message: error.message
     }))
   }))
-  .pipe(gulpPug(option.gulpPug))
-  .pipe(dest(url.pug.dest))
+  .pipe(pug({
+    pretty: option.isD,
+    plugins: [pugGlob()]
+  }))
+  .pipe(webpHtml())
+  .pipe(gulp.dest(url.pug.dest))
 }
-
-module.exports = pug;

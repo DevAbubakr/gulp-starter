@@ -1,66 +1,70 @@
 // Gulp include
-const {watch, series, parallel} = require("gulp");
+import gulp from "gulp";
 
-// server include
-const browserSync = require("browser-sync").create();
+// Browser-sync include
+import browserSync from "browser-sync";
 
-// url
-const url = require("./settings/url.js");
+// Url include
+import url from "./settings/url.js";
 
-// option
-const option = require("./settings/option.js");
+// Option include
+import option from "./settings/option.js";
 
-// clear 
-const clear = require("./task/clear.js")
+// Del include
+import clear from "./task/clear.js";
 
-// img
-const img = require("./task/img.js");
+// Pug include
+import pug from "./task/pug.js";
 
-// pug
-const pug = require("./task/pug.js");
+// Scss include
+import scss from "./task/scss.js";
 
-// sass
-const scss = require("./task/scss.js")
+// Image include
+import img from "./task/img.js";
 
-// script
-const javaScript = require("./task/script.js");
+// Font include
+import font from "./task/font.js";
 
-// font 
-const font = require("./task/font.js")
+// Js include
+import script from "./task/script.js";
 
 // watching
 const watching = () => {
-  // watch("/html/**/*.html",html).on("all", browserSync.reload)
-  // watch(url.css.src,css)
-  watch(url.img.watch,img).on("all", browserSync.reload)
-  watch(url.pug.watch,pug).on("all", browserSync.reload)
-  watch(url.scss.watch,scss).on("all", browserSync.reload)
-  watch(url.js.watch,javaScript).on("all", browserSync.reload)
-  watch(url.font.watch,font).on("all", browserSync.reload)
+  gulp.watch(url.img.watch,img).on("all", browserSync.reload)
+  gulp.watch(url.pug.watch,pug).on("all", browserSync.reload)
+  gulp.watch(url.scss.watch,scss).on("all", browserSync.reload)
+  gulp.watch(url.js.watch,script).on("all", browserSync.reload)
+  gulp.watch(url.font.watch,font).on("all", browserSync.reload)
 }
 
-// sever
+// Server
 const server = () => {
   browserSync.init({
-    server: {
-      baseDir: "./dist"
-    }
+      server: {
+          baseDir: url.ready
+      }
   })
 }
 
+const webFonts = () => {
+  return gulp.src(["./node_modules/@fortawesome/fontawesome-free/webfonts/*{ttf,woff2}","./node_modules/bootstrap-icons/font/fonts/*.{woff,woff2,ttf}"])
+  .pipe(gulp.dest(url.ready + "/font"))
+}
+
+// Build command
 // bild
-const build = series(
+const build = gulp.series(
   clear,
-  parallel(img,pug,javaScript,scss,font),
+  gulp.parallel(img,pug,script,scss,font,webFonts),
 )
 
 // dev
-const dev = series (
+const dev = gulp.series (
   build,
-  parallel(watching,server)
+  gulp.parallel(watching,server)
 )
 
 // comands
-exports.default = option.isP
+export default option.isP
   ? build
   : dev;

@@ -1,27 +1,30 @@
 // Gulp include
-const {src,dest} = require("gulp");
+import gulp from "gulp";
+
 
 // Plugins
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const size = require("gulp-size");
-const csso = require("gulp-csso");
-const rename = require("gulp-rename");
-const autoprefixer = require("gulp-autoprefixer");
-const sass = require('gulp-sass')(require('sass'))
-const gulpIf = require("gulp-if");
-const sassGlob = require("gulp-sass-glob");
-const nodeSassImporter = require("node-sass-tilde-importer");
+import plumber from "gulp-plumber";
+import notify from "gulp-notify";
+import size from "gulp-size";
+import csso from "gulp-csso";
+import rename from "gulp-rename";
+import autoprefixer from "gulp-autoprefixer";
+import gulpSass from 'gulp-sass';
+import nodeSass from 'sass';
+import gulpIf from "gulp-if";
+import sassGlob from "gulp-sass-glob";
+import nodeSassImporter from "node-sass-tilde-importer";
+const sass = gulpSass(nodeSass);
 
 // Url include
-const url = require("../settings/url.js");
+import url from "../settings/url.js";
 
 // option include
-const option = require("../settings/option.js");
+import option from "../settings/option.js";
 
 // Css task
-const scss = () => {
-    return src(url.scss.src,{ sourcemaps: true })
+export default () => {
+    return gulp.src(url.scss.src,{ sourcemaps: true })
     .pipe(plumber({
         errorHandler: notify.onError( error => ({
             title: "SCSS",
@@ -33,7 +36,7 @@ const scss = () => {
         importer: nodeSassImporter
     }))
     .pipe(gulpIf(option.isP, autoprefixer()))
-    .pipe(dest(url.scss.dest,{ sourcemaps: true }))
+    .pipe(gulp.dest(url.scss.dest,{ sourcemaps: true }))
     .pipe(size({
         title: ".scss"
     }))
@@ -44,7 +47,5 @@ const scss = () => {
     .pipe(rename({
         suffix: ".min"
     }))
-    .pipe(dest(url.scss.dest,{ sourcemaps: true }))
+    .pipe(gulp.dest(url.scss.dest,{ sourcemaps: true }))
 }
-
-module.exports = scss;
