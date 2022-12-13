@@ -1,5 +1,10 @@
 @import "config/var";
 @import "config/font";
+@import "mixins/media.scss";
+@import "mixins/bgi.scss";
+@import "mixins/flex.scss";
+@import "mixins/font-face.scss";
+
 body{
     padding: 0;
     margin: 0;

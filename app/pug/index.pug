@@ -1,4 +1,17 @@
 extends layout/temp 
 block var
-    - let page_title = "Home";
-block content 
+  - let page_title = "Home";
+block main  
+  .start
+    .start__container
+      .start__author
+        h1 Developer Abubakr
+      .start__title
+        h2= site_name
+      .start__social
+        a(href="https://t.me/dev_abubakr")
+          i.fa-brands.fa-telegram 
+        a(href="https://facebook.com/profile.php?id=100088023939947")
+          i.fa-brands.fa-facebook 
+        a(href="https://github.com/devAbubakr")
+          i.fa-brands.fa-github

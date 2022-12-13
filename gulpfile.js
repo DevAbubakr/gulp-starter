@@ -13,6 +13,12 @@ import option from "./settings/option.js";
 // Del include
 import clear from "./task/clear.js";
 
+// html include
+// import html from "./task/pug.js";
+
+// css include
+// import css from "./task/scss.js";
+
 // Pug include
 import pug from "./task/pug.js";
 
@@ -30,6 +36,8 @@ import script from "./task/script.js";
 
 // watching
 const watching = () => {
+  // gulp.watch(url.html.watch,img).on("all", browserSync.reload)
+  // gulp.watch(url.css.watch,pug).on("all", browserSync.reload)
   gulp.watch(url.img.watch,img).on("all", browserSync.reload)
   gulp.watch(url.pug.watch,pug).on("all", browserSync.reload)
   gulp.watch(url.scss.watch,scss).on("all", browserSync.reload)
