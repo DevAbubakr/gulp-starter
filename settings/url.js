@@ -34,8 +34,8 @@ export default {
     dest: urlDest + "/font"
   },
   img: {
-    src: urlSrc + "/image/*.{png,jpg,jpeg,webp,svg,gif}",
-    watch: urlSrc + "/image/**/*.{png,jpg,jpeg,webp,svg,gif}",
-    dest: urlDest + "/image"
+    src: urlSrc + "/img/*.{png,jpg,jpeg,webp,svg,gif}",
+    watch: urlSrc + "/img/**/*.{png,jpg,jpeg,webp,svg,gif}",
+    dest: urlDest + "/img"
   }
 }
