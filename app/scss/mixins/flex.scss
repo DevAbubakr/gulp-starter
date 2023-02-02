@@ -7,3 +7,15 @@
   display: flex;
   align-items: center;
 }
+
+@mixin flexZ {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flexC {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
